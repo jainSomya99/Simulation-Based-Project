@@ -3,7 +3,7 @@
 int main()
 {
 	int i,m;
-	printf("\nenter number of processes");
+	printf("\nEnter number of processes");
 	scanf("%d",&m);
 	int arrival[m];
 	int burst[m],burst1[m];
@@ -11,22 +11,22 @@ int main()
 	int tarrival[m];
 	int tq1=3;
 	int tq2=6;
-	int avgT=0;
-	int avgW=0;
-	printf("\nEnter arival time of processes:");
+	double avgT=0;
+	double avgW=0;
+	printf("\nEnter arrival time of processes:");
 	for(i=0;i<m;i++)
 	{
-		printf("\nfor processes %d :",i+1);
+		printf("\nFor processes %d :",i+1);
 		scanf("%d",&arrival[i]);
 	}
-	printf("\nenter burst time for processes:");
+	printf("\nEnter burst time for processes:");
 	for(i=0;i<m;i++)
 	{
-		printf("\nfor processes %d:",i+1);
+		printf("\nFor processes %d:",i+1);
 		scanf("%d",&burst[i]);
 		burst1[i]=burst[i];	
 	}
-	printf("First Iterarrivalion(TQ=3)\n");
+	printf("First Iteration(TQ=3)\n");
 	for(i=0;i<m;i++)
 	{  
 		if(arrival[i]<=tq1+arrival[i-1])
@@ -42,7 +42,7 @@ int main()
 			printf("\nLeft= %d",burst[i]);	
 		}
 	}
-	printf("\nAFTER ITERarrivalION 2 (TQ=6)");
+	printf("\nSecond Iteration(TQ=6)\n");
 	for(i=0;i<m;i++)
 	{
 		if(arrival[i]<=tq2+arrival[i-1])
@@ -58,7 +58,7 @@ int main()
 			printf("\nLeft= %d",burst[i]);	
 		}	
 	}
-	printf("\n3RD ITERarrivalION");
+	printf("\nThird Iteration(SJF)\n");
 	int j,temp;
 	for(i=0;i<m;i++)
 	{
@@ -78,13 +78,13 @@ int main()
 		tarrival[i]=ct[i]-arrival[i];
 		waiting[i]=tarrival[i]-burst1[i];
 		printf("\nCompletion time for process%d:%d \n",i+1,ct[i]);
-		printf("Turn arround time for process:%d:%d \n",i+1,tarrival[i]);
+		printf("Turn around time for process:%d:%d \n",i+1,tarrival[i]);
 		printf("Waiting time for process:%d : %d \n",i+1,waiting[i]);
 		avgT=avgT+tarrival[i];
 		avgW=avgW+waiting[i];
 	}
 	avgT=avgT/m;
 	avgW=avgW/m;
-	printf("\nAverage turn arrounf time: %d",avgT);
-	printf("\nAverage waiting time:%d",avgW);
+	printf("\nAverage turn around time: %f",avgT);
+	printf("\nAverage waiting time:%f",avgW);
 }
