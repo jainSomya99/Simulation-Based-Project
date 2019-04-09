@@ -31,6 +31,13 @@ int findlargest()
     {
         if (p[i].BT > p[max].BT)
             max = i;
+        else if(p[max].BT==p[i].BT)
+        {
+            if(p[max].id>p[i].id)
+                max=i;
+        }
+        else
+            continue;
     }
     // returning the index of the process having the largest BT
     return max;
@@ -41,25 +48,17 @@ int findCT()
 {
     int index;
     int flag = 0;
-    int i = 0;
-    while (1) {
-        if (i <= 3) {
-            index = findlargest();
-        }
-
-        else
-            index = findlargest();
+    while (1)
+    {
+        index = findlargest();
         printf("Process executing at time %d is: P%d\n",totaltime,index + 1);
-
         p[index].BT -= 1;
         totaltime += 1;
-        i++;
-
-        if (p[index].BT == 0) {
+        if (p[index].BT == 0)
+        {
             p[index].CT = totaltime;
             printf(" Process P%d is completed at %d\n",p[index].id,totaltime);
         }
-
         // loop termination condition
         if (totaltime == prefinaltotal)
             break;
