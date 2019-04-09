@@ -1,20 +1,15 @@
-
 //#include <bits/stdc++.h>
 #include<stdio.h>
-
 // creating a structure of a process
 struct process {
-    int processno;
-    int AT;
+    int id;
     int BT;
-    // for backup purpose to print in last
-    int BTbackup;
-    float WT;
-    float TAT;
+    int BTbackup;   // for backup purpose to print in last
+    int WT;
+    int TAT;
     int CT;
 };
-
-// creating a structe of 4 processes
+// creating object's array for 3 processes.
 struct process p[3];
 
 // variable to find the total time
@@ -24,22 +19,19 @@ int prefinaltotal = 0;
 // comparator function for sort()
 int compare(struct process p1,struct process p2)
 {
-    // compare the Arrival time of two processes
-    return p1.AT < p2.AT;
+    // compare the id of two processes to break tie
+    return p1.id< p2.id;
 }
 
-// finding the largest Arrival Time among all the available
-// process at that time
-int findlargest(int at)
+// computing the largest burst Time among all the available processes
+int findlargest()
 {
     int max = 0, i;
-    for (i = 0; i < 4; i++) {
-        if (p[i].AT <= at) {
-            if (p[i].BT > p[max].BT)
-                max = i;
-        }
+    for (i = 0; i < 3; i++)
+    {
+        if (p[i].BT > p[max].BT)
+            max = i;
     }
-
     // returning the index of the process having the largest BT
     return max;
 }
@@ -49,14 +41,14 @@ int findCT()
 {
     int index;
     int flag = 0;
-    int i = p[0].AT;
+    int i = 0;
     while (1) {
-        if (i <= 4) {
-            index = findlargest(i);
+        if (i <= 3) {
+            index = findlargest();
         }
 
         else
-            index = findlargest(4);
+            index = findlargest();
         printf("Process executing at time %d is: P%d\n",totaltime,index + 1);
 
         p[index].BT -= 1;
@@ -65,7 +57,7 @@ int findCT()
 
         if (p[index].BT == 0) {
             p[index].CT = totaltime;
-            printf(" Process P%d is completed at %d\n",p[index].processno,totaltime);
+            printf(" Process P%d is completed at %d\n",p[index].id,totaltime);
         }
 
         // loop termination condition
@@ -80,52 +72,40 @@ int main()
     int i;
 
     // initializing the process number
-    p[0].processno=2132;
-    p[1].processno=2102;
-    p[2].processno=2453;
-
-    // cout<<"arrival time of 4 processes : ";
-    for (i = 0; i < 3; i++) // taking AT
-    {
-        p[i].AT = 0;
-    }
+    p[0].id=2132;
+    p[1].id=2102;
+    p[2].id=2453;
 
     // cout<<" Burst time of 4 processes : ";
     p[0].BT=2;
     p[1].BT=4;
     p[2].BT=8;
-    for (i = 0; i < 3; i++) {
-
-        // assigning {2, 4, 6, 8} as Burst Time to the processes
+    for (i = 0; i < 3; i++)
+    {
         // backup for displaying the output in last
-        // calculating total required time for terminating
-        // the function().
+        // calculating total required time for terminating the function
         p[i].BTbackup = p[i].BT;
         prefinaltotal += p[i].BT;
     }
 
     // displaying the process before executing
-    printf("PNo\tAT\tBT\n");
+    printf("PNo\tID\tBT\n");
 
     for (i = 0; i < 3; i++) {
-           printf("\t%d\t%d\t%d\n",p[i].processno, p[i].AT, p[i].BT);
+           printf("%d\t%d\t%d\n",i+1, p[i].id, p[i].BT);
     }
     printf("\n");
-
-    // soritng process according to Arrival Time
-    //sort(p, p + 3, compare);
-
     // calculating initial time when execution starts
-    totaltime += p[0].AT;
+    totaltime += 0;
 
     // calculating to terminate loop
-    prefinaltotal += p[0].AT;
+    prefinaltotal += 0;
     findCT();
     int totalWT = 0;
     int totalTAT = 0;
     for (i = 0; i < 3; i++) {
         // since, TAT = CT - AT
-        p[i].TAT = p[i].CT - p[i].AT;
+        p[i].TAT = p[i].CT;
         p[i].WT = p[i].TAT - p[i].BTbackup;
 
         // finding total waiting time
@@ -138,14 +118,14 @@ int main()
     printf("After execution of all processes ... \n");
 
     // after all process executes
-    printf("PNo\tAT\tBT\tCT\tTAT\tWT\n");
+    printf("PNo\tID\tBT\tCT\tTAT\tWT\n");
 
     for (i = 0; i < 3; i++) {
-        printf("%d\t%d\t%d\t%d\t%d\t%d\n",p[i].processno,p[i].AT,p[i].BTbackup,p[i].CT,p[i].TAT,p[i].WT);
+        printf("%d\t%d\t%d\t%d\t%d\t%d\n",i+1,p[i].id,p[i].BTbackup,p[i].CT,p[i].TAT,p[i].WT);
     }
     printf("\nTotal TAT = %d\n",totalTAT);
-    printf("Average TAT = %d\n",totalTAT);
+    printf("Average TAT = %f\n",totalTAT/4.0);
     printf("Total WT = %d\n",totalWT);
-    printf("Average WT = %d\n",totalWT / 4.0);
+    printf("Average WT = %f\n",totalWT / 4.0);
     return 0;
 }
