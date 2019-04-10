@@ -33,7 +33,7 @@ int findlargest()
             max = i;
         else if(p[max].BT==p[i].BT)
         {
-            if(p[max].id>p[i].id)
+            if(compare(p[i],p[max]))
                 max=i;
         }
         else
@@ -44,7 +44,7 @@ int findlargest()
 }
 
 // function to find the completion time of each process
-int findCT()
+void findCT()
 {
     int index;
     int flag = 0;
