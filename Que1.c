@@ -134,40 +134,10 @@ int main()
 
 	printf("First Iteration(TQ=3)\n");
 	RR(3);
-	/*while(1)
-	{
-		if(p[i].AT<=tq1+p[i-1].AT)
-		{
-			p[i].BT=p[i].BT-tq1;
-			printf("\nprocess %d",i+1);
-			printf("\nLeft=%d",p[i].BT);
-		}
-		else
-		{
-			p[i].BT=p[i].BT-tq1;
-			printf("\nprocess %d ",i+1);
-			printf("\nLeft= %d",p[i].BT);
-		}
-	}*/
-
+	
 	printf("\nSecond Iteration(TQ=6)\n");
 	RR(6);
-	/*for(i=0;i<n;i++)
-	{
-		if(p[i].AT<=tq2+p[i-1].AT)
-		{
-			p[i].BT=p[i].BT-tq2;
-			printf("\nprocess %d",i+1);
-			printf("\nLeft= %d",p[i].BT);
-		}
-		else
-		{
-			p[i].BT=p[i].BT-tq2;
-			printf("\nprocess %d",i+1);
-			printf("\nLeft= %d",p[i].BT);
-		}
-	}
-	*/
+	
 	printf("\nThird Iteration(SJF)\n");
 	SJF();
 	for(i=0;i<n;i++)
